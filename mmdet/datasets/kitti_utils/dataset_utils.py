@@ -77,7 +77,10 @@ def kitti_label_to_detlabel(path, img3d_to_velo):
         if len(items) < 14:
             continue
 
-        label = KITTI_LABELS[items[0].encode('ascii')][0]
+        # todo in python3 we need to remove the b
+
+        # todo in python2 items[0].encode('ascii')
+        label = KITTI_LABELS[items[0]][0]
         if label == 0:
             continue  # ignore those that are not defined in KITTI_LABELS or dc
 

@@ -17,6 +17,7 @@ def single_test(model, data_loader, show=False):
     dataset = data_loader.dataset
     prog_bar = mmcv.ProgressBar(len(dataset))
     for i, data in enumerate(data_loader):
+        # when test it is not container mode
         with torch.no_grad():
             result = model(return_loss=False, rescale=not show, **data)
         results.append(result)
