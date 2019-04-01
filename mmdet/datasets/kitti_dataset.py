@@ -25,7 +25,6 @@ class KittiDataset(Dataset):
         self.is_training = self.config["common"]["is_training"]
 
         if self.is_training:
-
             self._set_group_flag()
 
     def update_dir(self):
@@ -111,11 +110,15 @@ class KittiDataset(Dataset):
             ori_shape=img.shape,
             img_shape=img.shape)
         pc_mask = np.ones_like(pc)
-
+        point_num = len(pc)
+        pc_meta = dict(
+            point_num=point_num
+        )
         if self.is_training:
             data = dict(
                 img=DC(to_tensor(img), stack=True),
                 img_meta=DC(img_meta, cpu_only=True),
+                pc_meta=DC(pc_meta, cpu_only=True),
                 gt_bboxes=label,
                 pc=DC(to_tensor(pc), stack=True),
                 calib=DC(to_tensor(calib), stack=True),
@@ -125,6 +128,7 @@ class KittiDataset(Dataset):
             data = dict(
                 img=[to_tensor(img)],
                 img_meta=DC(img_meta, cpu_only=True),
+                pc_meta=DC(pc_meta, cpu_only=True),
                 pc=[to_tensor(pc)],
                 calib=[to_tensor(calib)],
                 pc_mask=[to_tensor(pc_mask)]

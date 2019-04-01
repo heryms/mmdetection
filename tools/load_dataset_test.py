@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     config = {
               "split_name": "train.list",
-              "directory": "/home/heryms/kitti_dataset/object_det_training/training"}
+              "directory": "/home/maxwell/kitti_dataset/training"}
     config["common"] = {}
     config["common"]["is_training"] = True
     info = {"type": "KittiDataset",
@@ -33,6 +33,7 @@ if __name__ == '__main__':
     )
     for i, data in enumerate(data_loader):
         # batch_size = data['img'][0].size(0)
-        print("begin ", i, data['img'].data.size())
-        data_img = data['img'].data.cpu().numpy()
-        mmcv.imshow(data_img, "img", wait_time=0)
+        print("begin ", i, data['img'].data[0].size())
+        print("begin ", i, data['pc'].data[0].size())
+        # data_img = data['img'].data.cpu().numpy()
+        # mmcv.imshow(data_img, "img", wait_time=0)
