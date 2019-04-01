@@ -17,8 +17,6 @@ class KittiDataset(Dataset):
         self.split_name = split_name
         self.config = config
         self.update_dir()
-
-
         self.groundz = -1.7
         self._prep_func = prep_func
 
